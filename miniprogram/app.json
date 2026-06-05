@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/menu/index",
+    "pages/confirm/index",
+    "pages/history/index",
+    "pages/no-access/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "家里点菜",
+    "navigationBarBackgroundColor": "#0f766e",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f7f8fa"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

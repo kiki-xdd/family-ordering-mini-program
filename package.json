@@ -1,0 +1,9 @@
+{
+  "name": "family-ordering-mini-program",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "lint": "node scripts/check-existing.cjs cloudfunctions/shared/domain.js cloudfunctions/shared/adminAuth.js"
+  },
+  "devDependencies": {}
+}

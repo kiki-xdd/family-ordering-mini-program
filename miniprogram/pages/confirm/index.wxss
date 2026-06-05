@@ -1,0 +1,4 @@
+.placeholder-page {
+  padding: 48rpx;
+  color: #64748b;
+}
