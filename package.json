@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "lint": "node scripts/check-existing.cjs cloudfunctions/shared/domain.js cloudfunctions/shared/adminAuth.js"
+    "lint": "node scripts/check-existing.cjs cloudfunctions/shared/domain.js cloudfunctions/shared/adminAuth.js",
+    "sync:cloud-shared": "node scripts/sync-cloud-shared.cjs"
   },
   "devDependencies": {}
 }
