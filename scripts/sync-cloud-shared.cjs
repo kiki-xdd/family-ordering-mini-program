@@ -1,11 +1,12 @@
 const { copyFileSync, mkdirSync } = require('node:fs');
-const { dirname, join } = require('node:path');
+const { dirname } = require('node:path');
 
 const sharedFiles = [
   {
     source: 'cloudfunctions/shared/domain.js',
     targets: [
-      'cloudfunctions/getMenu/shared/domain.js'
+      'cloudfunctions/getMenu/shared/domain.js',
+      'cloudfunctions/submitOrder/shared/domain.js'
     ]
   }
 ];

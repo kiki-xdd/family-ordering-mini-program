@@ -1,4 +1,119 @@
-.placeholder-page {
-  padding: 48rpx;
+.history-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 24rpx 28rpx 40rpx;
+  background: #f8fafc;
+}
+
+.tabs {
+  height: 76rpx;
+  display: flex;
+  padding: 6rpx;
+  border-radius: 12rpx;
+  background: #e2e8f0;
+}
+
+.tab {
+  min-width: 0;
+  flex: 1;
+  border-radius: 8rpx;
+  color: #475569;
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 64rpx;
+  text-align: center;
+}
+
+.tab.active {
+  background: #ffffff;
+  color: #0f766e;
+  box-shadow: 0 4rpx 12rpx rgba(15, 23, 42, 0.08);
+}
+
+.loading,
+.empty {
+  padding-top: 160rpx;
+  color: #94a3b8;
+  font-size: 30rpx;
+  text-align: center;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-top: 24rpx;
+}
+
+.order-card {
+  box-sizing: border-box;
+  padding: 24rpx;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
+  background: #ffffff;
+}
+
+.order-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.order-title {
+  min-width: 0;
+  flex: 1;
+  color: #0f172a;
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.order-total {
+  flex-shrink: 0;
+  color: #dc2626;
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.dish-list {
+  margin-top: 18rpx;
+}
+
+.dish-line {
+  padding: 12rpx 0;
+  border-top: 1rpx solid #f1f5f9;
+}
+
+.dish-main {
+  color: #0f172a;
+  font-size: 28rpx;
+  line-height: 1.45;
+}
+
+.dish-name {
+  font-weight: 600;
+}
+
+.dish-quantity {
+  color: #0f766e;
+  font-weight: 700;
+}
+
+.dish-note {
+  margin-top: 6rpx;
   color: #64748b;
+  font-size: 26rpx;
+  line-height: 1.45;
+}
+
+.order-note {
+  margin-top: 16rpx;
+  padding: 16rpx;
+  border-radius: 8rpx;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 26rpx;
+  line-height: 1.5;
 }

@@ -10,7 +10,8 @@ const domain = require('../cloudfunctions/shared/domain.js');
 const {
   buildOrderItems,
   calculateTotalAmount,
-  formatPushMessage
+  formatPushMessage,
+  mergeSelectedItems
 } = domain;
 
 test('buildOrderItems snapshots available dishes with quantity and note', () => {
@@ -47,6 +48,21 @@ test('calculateTotalAmount returns null when any dish has no price', () => {
   ]), null);
 });
 
+test('mergeSelectedItems combines duplicate dishes and rejects empty dish ids', () => {
+  assert.deepEqual(mergeSelectedItems([
+    { dishId: 'dish-1', quantity: 1, itemNote: '少油' },
+    { dishId: 'dish-1', quantity: 2, itemNote: '不要葱' }
+  ]), [{
+    dishId: 'dish-1',
+    quantity: 3,
+    itemNote: '少油；不要葱'
+  }]);
+
+  assert.throws(() => mergeSelectedItems([
+    { dishId: '', quantity: 1 }
+  ]), /INVALID_DISH_ID/);
+});
+
 test('shapeMenu hides disabled categories and off-shelf dishes', () => {
   const { shapeMenu } = domain;
   const menu = shapeMenu([
@@ -80,8 +96,15 @@ test('formatPushMessage includes member, dishes, notes, and total', () => {
   assert.match(message, /合计：¥24.00/);
 });
 
-test('getMenu deploy copy stays in sync with shared domain helper', () => {
+test('cloud function deploy copies stay in sync with shared domain helper', () => {
   const source = readFileSync(new URL('../cloudfunctions/shared/domain.js', import.meta.url), 'utf8');
-  const copy = readFileSync(new URL('../cloudfunctions/getMenu/shared/domain.js', import.meta.url), 'utf8');
-  assert.equal(copy, source);
+  const targets = [
+    '../cloudfunctions/getMenu/shared/domain.js',
+    '../cloudfunctions/submitOrder/shared/domain.js'
+  ];
+
+  for (const target of targets) {
+    const copy = readFileSync(new URL(target, import.meta.url), 'utf8');
+    assert.equal(copy, source);
+  }
 });

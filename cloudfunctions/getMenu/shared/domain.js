@@ -33,6 +33,38 @@ function buildOrderItems(selectedItems, dishesById) {
   });
 }
 
+function mergeSelectedItems(selectedItems) {
+  const mergedByDishId = new Map();
+
+  for (const item of selectedItems) {
+    if (!item || !item.dishId) {
+      throw new Error('INVALID_DISH_ID');
+    }
+
+    const quantity = normalizeQuantity(item.quantity);
+    const existing = mergedByDishId.get(item.dishId);
+    if (existing) {
+      const mergedQuantity = normalizeQuantity(existing.quantity + quantity);
+      mergedByDishId.set(item.dishId, {
+        ...existing,
+        quantity: mergedQuantity,
+        itemNote: [existing.itemNote, item.itemNote]
+          .map((note) => String(note || '').trim())
+          .filter(Boolean)
+          .join('；')
+      });
+    } else {
+      mergedByDishId.set(item.dishId, {
+        dishId: item.dishId,
+        quantity,
+        itemNote: String(item.itemNote || '').trim()
+      });
+    }
+  }
+
+  return Array.from(mergedByDishId.values());
+}
+
 function calculateTotalAmount(items) {
   const hasUnpricedItem = items.some((item) => item.price === null);
   if (hasUnpricedItem) return null;
@@ -90,6 +122,7 @@ function shapeMenu(categories, dishes) {
 module.exports = {
   normalizePrice,
   normalizeQuantity,
+  mergeSelectedItems,
   buildOrderItems,
   calculateTotalAmount,
   formatPushMessage,

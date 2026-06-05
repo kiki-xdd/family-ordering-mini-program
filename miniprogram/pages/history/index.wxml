@@ -1,1 +1,43 @@
-<view class="page placeholder-page">历史记录加载中</view>
+<view class="page history-page">
+  <view class="tabs">
+    <view
+      class="{{mineTabClass}}"
+      data-scope="mine"
+      bindtap="switchScope"
+    >
+      我的记录
+    </view>
+    <view
+      class="{{familyTabClass}}"
+      data-scope="family"
+      bindtap="switchScope"
+    >
+      全家记录
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">历史记录加载中</view>
+
+  <view wx:if="{{showEmpty}}" class="empty">还没有历史记录</view>
+
+  <view wx:if="{{hasOrders}}" class="order-list">
+    <view wx:for="{{orders}}" wx:key="_id" class="order-card">
+      <view class="order-head">
+        <view class="order-title">{{item.submitterName}} · {{item.createdAtText}}</view>
+        <view wx:if="{{item.hasTotalAmount}}" class="order-total">¥{{item.totalAmount}}</view>
+      </view>
+
+      <view class="dish-list">
+        <view wx:for="{{item.items}}" wx:key="dishId" wx:for-item="dish" class="dish-line">
+          <view class="dish-main">
+            <text class="dish-name">{{dish.dishName}}</text>
+            <text class="dish-quantity"> x {{dish.quantity}}</text>
+          </view>
+          <view wx:if="{{dish.hasItemNote}}" class="dish-note">{{dish.itemNote}}</view>
+        </view>
+      </view>
+
+      <view wx:if="{{item.hasOrderNote}}" class="order-note">整单备注：{{item.orderNote}}</view>
+    </view>
+  </view>
+</view>
