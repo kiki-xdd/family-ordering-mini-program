@@ -15,6 +15,19 @@
 npm test
 ```
 
+后台构建：
+
+```powershell
+cd admin
+npm install
+npm run build
+cd ..
+```
+
+## 部署
+
+详见 [docs/deployment.md](docs/deployment.md)。
+
 ## GitHub 推送
 
 ```powershell
