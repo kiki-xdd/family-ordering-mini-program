@@ -6,13 +6,21 @@ const sharedFiles = [
     source: 'cloudfunctions/shared/domain.js',
     targets: [
       'cloudfunctions/getMenu/shared/domain.js',
-      'cloudfunctions/submitOrder/shared/domain.js'
+      'cloudfunctions/submitOrder/shared/domain.js',
+      'cloudfunctions/adminApi/shared/domain.js'
     ]
   },
   {
     source: 'cloudfunctions/shared/adminAuth.js',
     targets: [
       'cloudfunctions/adminLogin/shared/adminAuth.js'
+    ]
+  },
+  {
+    source: 'cloudfunctions/shared/push.js',
+    targets: [
+      'cloudfunctions/submitOrder/shared/push.js',
+      'cloudfunctions/adminApi/shared/push.js'
     ]
   }
 ];

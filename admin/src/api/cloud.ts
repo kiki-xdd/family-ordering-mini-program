@@ -122,3 +122,7 @@ export function saveMember(token: string, payload: Record<string, unknown>) {
 export function listOrders(token: string) {
   return adminApi<{ ok: true; orders: AdminOrder[] }>(token, 'listOrders');
 }
+
+export function retryOrderPush(token: string, orderId: string) {
+  return adminApi<{ ok: true; pushStatus: string }>(token, 'retryOrderPush', { orderId });
+}

@@ -2,9 +2,9 @@ const cloud = require('wx-server-sdk');
 const {
   buildOrderItems,
   calculateTotalAmount,
-  formatPushMessage,
   mergeSelectedItems
 } = require('./shared/domain');
+const { sendOrderPush } = require('./shared/push');
 
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 
@@ -30,35 +30,11 @@ function getDisplayName(member) {
   return member.displayName || member.name || member.nickname || '家庭成员';
 }
 
-function hasPushConfig(config) {
-  if (!config || !config.pushProvider || !config.pushConfig) return false;
-  if (config.pushProvider === 'server_chan') {
-    return Boolean(config.pushConfig.sendKey);
-  }
-  if (config.pushProvider === 'webhook') {
-    return Boolean(config.pushConfig.webhookUrl);
-  }
-  return false;
-}
-
 async function sendPush(order) {
   const result = await db.collection('admin_config')
     .limit(1)
     .get();
-  const config = result.data[0];
-
-  if (!hasPushConfig(config)) {
-    return {
-      status: 'skipped',
-      error: 'PUSH_NOT_CONFIGURED'
-    };
-  }
-
-  return {
-    status: 'pending_provider',
-    error: '',
-    message: formatPushMessage(order)
-  };
+  return sendOrderPush(result.data[0], order);
 }
 
 exports.main = async (event = {}) => {
@@ -96,9 +72,10 @@ exports.main = async (event = {}) => {
 
   const addResult = await db.collection('orders').add({ data: order });
   const orderId = addResult._id;
+  const savedOrder = { _id: orderId, ...order };
 
   try {
-    const pushResult = await sendPush(order);
+    const pushResult = await sendPush(savedOrder);
     await db.collection('orders').doc(orderId).update({
       data: {
         pushStatus: pushResult.status,

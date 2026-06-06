@@ -27,6 +27,11 @@ function createCollection(initialRows = []) {
       return this;
     },
     async get() {
+      if (docId) {
+        const row = rows.find((item) => item._id === docId);
+        docId = null;
+        return { data: row };
+      }
       let data = rows;
       if (whereFilter) {
         data = data.filter((row) => Object.entries(whereFilter)
@@ -71,6 +76,7 @@ async function loadAdminApi(overrides = {}) {
     admin_sessions: createCollection([
       { token: 'valid-token', expiresAt: Date.now() + 60000 }
     ]),
+    admin_config: createCollection([]),
     audit_logs: createCollection([]),
     categories: createCollection([
       { _id: 'cat-2', name: '汤类', sortOrder: 2, enabled: true },
@@ -185,4 +191,20 @@ test('adminApi saves members and lists recent orders', async () => {
 
   const orders = await adminApi.main({ token: 'valid-token', action: 'listOrders' });
   assert.deepEqual(orders.orders.map((order) => order._id), ['order-2', 'order-1']);
+});
+
+test('adminApi retries order push and updates push fields', async () => {
+  const { adminApi, collections } = await loadAdminApi();
+
+  const result = await adminApi.main({
+    token: 'valid-token',
+    action: 'retryOrderPush',
+    payload: { orderId: 'order-1' }
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.pushStatus, 'skipped');
+  assert.equal(collections.orders.rows[0].pushStatus, 'skipped');
+  assert.equal(collections.orders.rows[0].pushError, 'PUSH_NOT_CONFIGURED');
+  assert.equal(collections.audit_logs.rows.at(-1).action, 'retryPush');
 });

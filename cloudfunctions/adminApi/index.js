@@ -1,4 +1,5 @@
 const cloud = require('wx-server-sdk');
+const { sendOrderPush } = require('./shared/push');
 
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV });
 
@@ -166,6 +167,27 @@ async function listOrders() {
   return { ok: true, orders: result.data };
 }
 
+async function retryOrderPush(payload) {
+  const orderId = text(payload.orderId);
+  if (!orderId) throw new Error('ORDER_ID_REQUIRED');
+
+  const [orderResult, configResult] = await Promise.all([
+    db.collection('orders').doc(orderId).get(),
+    db.collection('admin_config').limit(1).get()
+  ]);
+
+  const pushResult = await sendOrderPush(configResult.data[0], orderResult.data);
+  await db.collection('orders').doc(orderId).update({
+    data: {
+      pushStatus: pushResult.status,
+      pushError: pushResult.error || ''
+    }
+  });
+  await log('retryPush', 'order', orderId, pushResult.status);
+
+  return { ok: true, pushStatus: pushResult.status };
+}
+
 const actions = {
   listCategories,
   saveCategory,
@@ -173,7 +195,8 @@ const actions = {
   saveDish,
   listMembers,
   saveMember,
-  listOrders
+  listOrders,
+  retryOrderPush
 };
 
 exports.main = async (event = {}) => {

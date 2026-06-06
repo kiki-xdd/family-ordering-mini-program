@@ -437,6 +437,11 @@ th {
   color: #334155 !important;
 }
 
+.retry-button {
+  margin-top: 12px;
+  padding: 0 12px;
+}
+
 @media (max-width: 720px) {
   .admin-layout {
     grid-template-columns: 1fr;

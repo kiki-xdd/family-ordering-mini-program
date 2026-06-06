@@ -100,7 +100,21 @@ test('cloud function deploy copies stay in sync with shared domain helper', () =
   const source = readFileSync(new URL('../cloudfunctions/shared/domain.js', import.meta.url), 'utf8');
   const targets = [
     '../cloudfunctions/getMenu/shared/domain.js',
-    '../cloudfunctions/submitOrder/shared/domain.js'
+    '../cloudfunctions/submitOrder/shared/domain.js',
+    '../cloudfunctions/adminApi/shared/domain.js'
+  ];
+
+  for (const target of targets) {
+    const copy = readFileSync(new URL(target, import.meta.url), 'utf8');
+    assert.equal(copy, source);
+  }
+});
+
+test('cloud function deploy copies stay in sync with shared push helper', () => {
+  const source = readFileSync(new URL('../cloudfunctions/shared/push.js', import.meta.url), 'utf8');
+  const targets = [
+    '../cloudfunctions/submitOrder/shared/push.js',
+    '../cloudfunctions/adminApi/shared/push.js'
   ];
 
   for (const target of targets) {
