@@ -21,7 +21,9 @@ body {
 }
 
 button,
-input {
+input,
+select,
+textarea {
   font: inherit;
 }
 
@@ -157,6 +159,8 @@ button:disabled {
   display: flex;
   min-height: 52px;
   align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   border-bottom: 1px solid #d9e0e8;
 }
 
@@ -177,6 +181,260 @@ button:disabled {
   color: #64748b;
   font-size: 15px;
   line-height: 1.7;
+}
+
+.management-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.management-grid.wide {
+  grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+}
+
+.form-panel,
+.data-panel,
+.dashboard-grid article {
+  border: 1px solid #d9e0e8;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.form-panel,
+.data-panel {
+  padding: 20px;
+}
+
+.form-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.form-panel h3,
+.data-panel h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.form-panel label {
+  display: grid;
+  gap: 7px;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-panel input,
+.form-panel select,
+.form-panel textarea {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #111827;
+  background: #ffffff;
+  outline: none;
+}
+
+.form-panel textarea {
+  min-height: 88px;
+  padding-top: 10px;
+  resize: vertical;
+}
+
+.form-panel input:focus,
+.form-panel select:focus,
+.form-panel textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 14%);
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.check-row {
+  display: flex !important;
+  align-items: center;
+  gap: 8px !important;
+  font-weight: 600 !important;
+}
+
+.check-row input {
+  width: 16px;
+  min-height: 16px;
+}
+
+.button-row,
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.button-row {
+  justify-content: flex-start;
+}
+
+.button-row button,
+.panel-heading button,
+.workspace-header button {
+  padding: 0 14px;
+}
+
+.form-panel button[type="submit"] {
+  color: #ffffff;
+  background: #1f4f82;
+  font-weight: 800;
+}
+
+.secondary-button {
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  background: #ffffff;
+  font-weight: 700;
+}
+
+.secondary-button:hover {
+  background: #f8fafc;
+}
+
+.text-button {
+  min-height: auto;
+  padding: 0;
+  color: #1f4f82;
+  background: transparent;
+  font-weight: 700;
+}
+
+.success-message {
+  margin: 0;
+  color: #14743c;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.muted {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.table-wrap {
+  width: 100%;
+  margin-top: 16px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+th,
+td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e5eaf0;
+  color: #334155;
+  font-size: 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mono-cell {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  word-break: break-all;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.dashboard-grid article {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+}
+
+.dashboard-grid span {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.dashboard-grid strong {
+  color: #111827;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.full-panel {
+  max-width: 980px;
+}
+
+.order-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.order-card {
+  padding: 16px;
+  border: 1px solid #e5eaf0;
+  border-radius: 8px;
+  background: #fbfdff;
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.order-card-header strong {
+  color: #111827;
+  font-size: 15px;
+}
+
+.order-card-header span {
+  color: #123a63;
+  font-weight: 800;
+}
+
+.order-card ul {
+  display: grid;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding-left: 18px;
+  color: #334155;
+}
+
+.order-card small {
+  color: #64748b;
+}
+
+.order-note {
+  margin-top: 12px !important;
+  color: #334155 !important;
 }
 
 @media (max-width: 720px) {
@@ -201,5 +459,15 @@ button:disabled {
 
   .workspace {
     padding: 22px 18px;
+  }
+
+  .management-grid,
+  .management-grid.wide,
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
   }
 }
