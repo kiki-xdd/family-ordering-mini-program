@@ -1,0 +1,52 @@
+<view class="page confirm-page">
+  <view wx:if="{{!hasItems}}" class="empty">还没有选择菜品</view>
+
+  <view wx:else class="confirm-content">
+    <view class="section-title">本次点菜</view>
+
+    <view wx:for="{{items}}" wx:key="dishId" class="dish-card">
+      <view class="dish-head">
+        <view class="dish-name">{{item.dishName}}</view>
+        <view class="dish-quantity">x {{item.quantity}}</view>
+      </view>
+      <view wx:if="{{item.hasPrice}}" class="dish-price">¥{{item.price}}</view>
+      <input
+        class="note-input"
+        data-id="{{item.dishId}}"
+        value="{{item.itemNote}}"
+        placeholder="这道菜有什么备注"
+        maxlength="80"
+        bindinput="updateItemNote"
+      />
+    </view>
+
+    <view class="order-note-box">
+      <view class="section-title">整单备注</view>
+      <textarea
+        class="order-note"
+        value="{{orderNote}}"
+        placeholder="比如少油、晚一点做、谁来取"
+        maxlength="200"
+        bindinput="updateOrderNote"
+      />
+    </view>
+  </view>
+
+  <view class="submit-bar">
+    <view class="total">
+      <text wx:if="{{hasItems}}">
+        <text wx:if="{{hasTotalAmount}}">合计 ¥{{totalAmount}}</text>
+        <text wx:else>部分菜品未标价</text>
+      </text>
+      <text wx:else>请先选择菜品</text>
+    </view>
+    <button
+      class="{{submitButtonClass}}"
+      loading="{{submitting}}"
+      disabled="{{submitting || !hasItems}}"
+      bindtap="submit"
+    >
+      提交
+    </button>
+  </view>
+</view>

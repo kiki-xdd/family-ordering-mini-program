@@ -1,0 +1,6 @@
+<view class="page no-access">
+  <view class="panel">
+    <view class="title">暂时不能点菜</view>
+    <view class="text">你的微信账号还不在家庭成员白名单里，请联系管理员添加。</view>
+  </view>
+</view>

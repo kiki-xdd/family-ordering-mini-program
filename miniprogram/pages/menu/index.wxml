@@ -1,0 +1,69 @@
+<view class="page menu-page">
+  <view wx:if="{{loading}}" class="loading">菜单加载中</view>
+
+  <view wx:else class="menu-shell">
+    <scroll-view class="category-list" scroll-y enhanced>
+      <view
+        wx:for="{{categories}}"
+        wx:key="_id"
+        class="{{item.className}}"
+        data-id="{{item._id}}"
+        bindtap="selectCategory"
+      >
+        {{item.name}}
+      </view>
+    </scroll-view>
+
+    <scroll-view class="dish-list" scroll-y enhanced>
+      <view wx:if="{{!hasVisibleDishes}}" class="empty">这个分类暂时没有菜</view>
+
+      <view wx:for="{{visibleDishes}}" wx:key="_id" class="dish-row">
+        <image
+          wx:if="{{item.imageFileId}}"
+          class="dish-image"
+          src="{{item.imageFileId}}"
+          mode="aspectFill"
+        />
+        <view wx:else class="dish-image dish-image-empty">无图</view>
+
+        <view class="dish-main">
+          <view class="dish-name">{{item.name}}</view>
+          <view wx:if="{{item.description}}" class="dish-desc">{{item.description}}</view>
+          <view wx:if="{{item.hasPrice}}" class="dish-price">¥{{item.price}}</view>
+        </view>
+
+        <view class="dish-actions">
+          <button
+            wx:if="{{item.selectedQuantity}}"
+            class="quantity-button minus"
+            data-id="{{item._id}}"
+            bindtap="decreaseDish"
+          >
+            -
+          </button>
+          <text wx:if="{{item.selectedQuantity}}" class="quantity">{{item.selectedQuantity}}</text>
+          <button
+            class="quantity-button plus"
+            data-id="{{item._id}}"
+            bindtap="addDish"
+          >
+            +
+          </button>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="cart-bar">
+    <view class="cart-summary">
+      <view class="cart-count">{{selectedCount}}</view>
+      <view class="cart-text">已选</view>
+    </view>
+    <button
+      class="{{submitButtonClass}}"
+      bindtap="openConfirm"
+    >
+      提交点菜
+    </button>
+  </view>
+</view>

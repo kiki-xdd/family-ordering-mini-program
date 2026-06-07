@@ -1,0 +1,140 @@
+.confirm-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 28rpx 28rpx 144rpx;
+  background: #f8fafc;
+}
+
+.confirm-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.section-title {
+  color: #0f172a;
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.dish-card,
+.order-note-box {
+  box-sizing: border-box;
+  padding: 24rpx;
+  border: 1rpx solid #e2e8f0;
+  border-radius: 12rpx;
+  background: #ffffff;
+}
+
+.dish-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.dish-name {
+  min-width: 0;
+  flex: 1;
+  color: #0f172a;
+  font-size: 32rpx;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.dish-quantity {
+  flex-shrink: 0;
+  color: #0f766e;
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.dish-price {
+  margin-top: 8rpx;
+  color: #dc2626;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.note-input {
+  height: 72rpx;
+  margin-top: 20rpx;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  border-radius: 8rpx;
+  background: #f1f5f9;
+  color: #0f172a;
+  font-size: 28rpx;
+}
+
+.order-note-box {
+  margin-top: 8rpx;
+}
+
+.order-note {
+  width: 100%;
+  min-height: 168rpx;
+  margin-top: 16rpx;
+  box-sizing: border-box;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  background: #f1f5f9;
+  color: #0f172a;
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+.empty {
+  padding-top: 180rpx;
+  color: #94a3b8;
+  font-size: 30rpx;
+  text-align: center;
+}
+
+.submit-bar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  min-height: 128rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 28rpx calc(20rpx + env(safe-area-inset-bottom));
+  background: #ffffff;
+  box-shadow: 0 -12rpx 32rpx rgba(15, 23, 42, 0.08);
+}
+
+.total {
+  min-width: 0;
+  flex: 1;
+  padding-right: 24rpx;
+  color: #0f172a;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.submit-button {
+  width: 192rpx;
+  height: 72rpx;
+  min-height: 72rpx;
+  margin: 0;
+  border-radius: 36rpx;
+  background: #0f766e;
+  color: #ffffff;
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 72rpx;
+}
+
+.submit-button::after {
+  border: 0;
+}
+
+.submit-button.disabled {
+  background: #cbd5e1;
+}

@@ -3,8 +3,10 @@ node_modules/
 dist/
 build/
 coverage/
+.npm-cache/
 .env
 .env.*
+!.env.example
 *.log
 .DS_Store
 Thumbs.db

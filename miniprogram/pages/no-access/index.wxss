@@ -1,0 +1,32 @@
+.no-access {
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx;
+  background: #f8fafc;
+}
+
+.panel {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 48rpx 40rpx;
+  border-radius: 16rpx;
+  background: #ffffff;
+  box-shadow: 0 16rpx 48rpx rgba(15, 23, 42, 0.08);
+}
+
+.title {
+  color: #0f172a;
+  font-size: 36rpx;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.text {
+  margin-top: 20rpx;
+  color: #64748b;
+  font-size: 28rpx;
+  line-height: 1.7;
+}
